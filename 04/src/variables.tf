@@ -1,16 +1,13 @@
 ###cloud vars
-variable "token" {
-  type        = string
-  description = "OAuth-token; https://cloud.yandex.ru/docs/iam/concepts/authorization/oauth-token"
-}
-
 variable "cloud_id" {
   type        = string
+  default     = "b1ge8ac59kbr0jvvl38e"
   description = "https://cloud.yandex.ru/docs/resource-manager/operations/cloud/get-id"
 }
 
 variable "folder_id" {
   type        = string
+  default     = "b1g9e0n72sa8lujhtbln"
   description = "https://cloud.yandex.ru/docs/resource-manager/operations/folder/get-id"
 }
 
@@ -29,6 +26,26 @@ variable "vpc_name" {
   type        = string
   default     = "develop"
   description = "VPC network&subnet name"
+}
+
+variable "ubuntu_family_var" {
+  type        = string
+  default     = "ubuntu-2004-lts"
+  description = "Some var"
+}
+
+variable "metadata" {
+  type = map(object({
+    serial-port-enable = number
+    ssh-keys           =  string
+  }))  
+  default = {
+    "vm" = {
+      serial-port-enable = 1
+      ssh-keys = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOQptbZSCfNJdnehfAcXMe2dubOcwN6FZZawaY3OL3dn user@DebVM1"
+    }  
+  }
+  description = "metadata"
 }
 
 ###common vars
@@ -54,4 +71,7 @@ variable "vm_db_name" {
 }
 
 
-
+variable "test-vpc-source" {
+  type = string
+  default = "./test-vpc"
+}
