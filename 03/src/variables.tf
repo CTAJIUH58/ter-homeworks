@@ -33,11 +33,25 @@ variable "vpc_name" {
   description = "VPC network&subnet name"
 }
 
-###data vars
 variable "ubuntu_family_var" {
   type        = string
   default     = "ubuntu-2004-lts"
   description = "Some var"
+}
+
+variable "storage_name" {
+  type = string
+  default = "storage"
+}
+
+variable "storage_platform" {
+  type = string
+  default = "standard-v2"
+}
+
+variable "storage_disk_mode" {
+  type = string
+  default = "READ_WRITE"
 }
 
 variable "db_vm" {
@@ -47,6 +61,7 @@ variable "db_vm" {
     memory  = number
     disk_volume = number
 #    platform    = string
+    core_fraction = number
   }))
   default = [
     {
@@ -55,6 +70,7 @@ variable "db_vm" {
       memory        = 4
       disk_volume   = 20
 #      platform      = "standard-v1"
+      core_fraction = 5
 
     },
     {
@@ -63,7 +79,7 @@ variable "db_vm" {
       memory        = 8
       disk_volume   = 25
 #      platform      = "standard-v1"
-
+      core_fraction = 5  
     }
   ]
 

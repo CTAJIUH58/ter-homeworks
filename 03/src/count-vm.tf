@@ -5,9 +5,9 @@ resource "yandex_compute_instance" "platform" {
   name        = "web-${ count.index+1 }"
   count = 2
   resources {
-    cores         = 2
-    memory        = 2
-    core_fraction = 5
+    cores         = var.db_vm[count.index+1].cores
+    memory        = var.db_vm[count.index+1].memory
+    core_fraction = var.db_vm[count.index+1].core_fraction
   }
   boot_disk {
     initialize_params {

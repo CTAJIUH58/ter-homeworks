@@ -7,11 +7,10 @@ resource "yandex_compute_disk" "disk" {
 }
 
 resource "yandex_compute_instance" "storage" {
-  name         = "storage"
-  platform_id  = "standard-v2"
+  name         = var.storage_name
+  platform_id  = var.storage_platform
   zone         = var.default_zone
   folder_id    = var.folder_id
-  description  = "Storage VM"
 
   resources {
     cores         = var.db_vm[1].cores
@@ -33,7 +32,7 @@ resource "yandex_compute_instance" "storage" {
     for_each = yandex_compute_disk.disk
     content {
       disk_id = secondary_disk.value.id
-      mode    = "READ_WRITE"
+      mode    = var.storage_disk_mode
     }
   }
 }
